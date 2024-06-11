@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { LessonsService } from './lessons.service';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+
 import { CreateLessonDto } from './dto/create-lesson.dto';
-import { UpdateLessonDto } from './dto/update-lesson.dto';
+import { LessonsService } from './lessons.service';
 
 @Controller('lessons')
 export class LessonsController {
@@ -22,13 +22,8 @@ export class LessonsController {
     return this.lessonsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLessonDto: UpdateLessonDto) {
-    return this.lessonsService.update(+id, updateLessonDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.lessonsService.remove(+id);
+  @Get(':techType')
+  update(@Param('techType') techType: string) {
+    return this.lessonsService.findAllByTechType(techType);
   }
 }

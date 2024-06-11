@@ -1,28 +1,30 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLessonDto } from './dto/create-lesson.dto';
-import { UpdateLessonDto } from './dto/update-lesson.dto';
+import { Lesson, Prisma } from '@prisma/client';
+
 import { PrismaService } from '../prisma/prisma/prisma.service';
 
 @Injectable()
 export class LessonsService {
   constructor(private prisma: PrismaService) {}
-  create(createLessonDto: CreateLessonDto) {
-    return 'This action adds a new lesson';
+  async create(data: Prisma.LessonCreateInput) {
+    await this.prisma.lesson.create({
+      data,
+    });
   }
 
-  findAll() {
-    return `This action returns all lessons`;
+  async findAll(): Promise<Lesson[]> {
+    return await this.prisma.lesson.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} lesson`;
+  async findOne(id: number): Promise<Lesson | null> {
+    return await this.prisma.lesson.findFirst({
+      where: { id: Number(id) },
+    });
   }
 
-  update(id: number, updateLessonDto: UpdateLessonDto) {
-    return `This action updates a #${id} lesson`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} lesson`;
+  async findAllByTechType(techType: string): Promise<Lesson[] | null> {
+    return this.prisma.lesson.findMany({
+      where: { techType },
+    });
   }
 }
