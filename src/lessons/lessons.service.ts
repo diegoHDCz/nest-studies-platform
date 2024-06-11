@@ -6,6 +6,7 @@ import { PrismaService } from '../prisma/prisma/prisma.service';
 @Injectable()
 export class LessonsService {
   constructor(private prisma: PrismaService) {}
+
   async create(data: Prisma.LessonCreateInput) {
     await this.prisma.lesson.create({
       data,
@@ -23,7 +24,7 @@ export class LessonsService {
   }
 
   async findAllByTechType(techType: string): Promise<Lesson[] | null> {
-    return this.prisma.lesson.findMany({
+    return await this.prisma.lesson.findMany({
       where: { techType },
     });
   }
