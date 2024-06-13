@@ -1,10 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 import { CreateLessonDto } from './dto/create-lesson.dto';
-import { LessonsService } from './lessons.service';
-import { ApiOkResponse, ApiParam, ApiResponse } from '@nestjs/swagger';
-import { Lesson } from './entities/lesson.entity';
 import { GetLessonDto } from './dto/get-lesson.dto';
+import { LessonsService } from './lessons.service';
 
 @Controller('lessons')
 export class LessonsController {
@@ -19,8 +18,7 @@ export class LessonsController {
     return this.lessonsService.create(createLessonDto);
   }
 
-  @Get(':id')
-  @ApiParam({ type: 'number', name: 'id' })
+  @Get()
   @ApiOkResponse({
     description: 'The lesson records',
     type: GetLessonDto,

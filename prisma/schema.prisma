@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,16 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Lesson {
-   id    Int     @id @default(autoincrement())
-   title String 
-   instructor String
-   description String
-   techType String
-   createdAt DateTime
-   watched Boolean 
-   
-
+  id          Int      @id @default(autoincrement())
+  title       String
+  instructor  String
+  description String
+  techType    String
+  createdAt   DateTime? @default(now())
+  watched     Boolean?  @default(false)
+  instructorEmail String @default("")
 }
-

@@ -7,5 +7,6 @@ export class Lesson {
     public techType: string,
     public createdAt: Date,
     public watched: boolean,
+    public instructorEmail: string,
   ) {}
 }

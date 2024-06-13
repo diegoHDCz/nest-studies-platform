@@ -13,4 +13,6 @@ export class CreateLessonDto {
   createdAt: Date;
   @ApiProperty()
   watched: boolean;
+  @ApiProperty()
+  instructorEmail: string;
 }
